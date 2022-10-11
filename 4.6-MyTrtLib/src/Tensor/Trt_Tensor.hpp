@@ -4,7 +4,7 @@
  * @Author: zwy
  * @Date: 2022-10-10 09:21:44
  * @LastEditors: zwy
- * @LastEditTime: 2022-10-10 20:44:26
+ * @LastEditTime: 2022-10-11 19:52:04
  */
 #ifndef TRT_TENSOR_HPP
 #define TRT_TENSOR_HPP
@@ -16,7 +16,9 @@
 #include <opencv2/opencv.hpp>
 #include "../memory/mix_memory.hpp"
 
-typedef struct CUstream_st *CUStream;
+struct CUstream_st;
+typedef CUstream_st CUStreamRaw;
+typedef CUStreamRaw *CUStream;
 
 namespace TRT
 {
@@ -61,7 +63,7 @@ namespace TRT
     private:
         Tensor &compute_shape_string();
 
-        Tensor &adajust_memory_by_update_dims_or_type();
+        Tensor &adjust_memory_by_update_dims_or_type();
 
         void setup_data(std::shared_ptr<MixMemory> data);
 
@@ -70,7 +72,7 @@ namespace TRT
 
         Tensor &operator=(const Tensor &other) = delete;
 
-        explicit Tensor(DataType dtype = DataType::Float, std::shared_ptr<MixMemory> data = nullptr,
+        explicit Tensor(DataType dtype, std::shared_ptr<MixMemory> data,
                         int device_id = CURRENT_DEVICE_ID);
 
         explicit Tensor(int n, int c, int h, int w, DataType dtype = DataType::Float,
@@ -208,7 +210,7 @@ namespace TRT
             return *this;
         }
 
-        Tensor &set_mat(int n, const cv::Mat &image);
+        Tensor &set_mat(int n, const cv::Mat &_image);
 
         Tensor &set_norm_mat(int n, const cv::Mat &image, float mean[3], float std[3]);
 
@@ -224,9 +226,8 @@ namespace TRT
 
         Tensor &copy_from_cpu(size_t offset, const void *src, size_t num_element);
 
-        void
-        reference_data(const std::vector<int> &shape, void *cpu_data, size_t cpu_size, void *gpu_data, size_t gpu_size,
-                       DataType dtype);
+        void reference_data(const std::vector<int> &shape, void *cpu_data, size_t cpu_size, void *gpu_data, size_t gpu_size,
+                            DataType dtype);
 
         bool save_to_file(const std::string &file) const;
 

@@ -20,7 +20,7 @@ set(LD_TRT_LIBS myelin nvcaffe_parser nvinfer nvinfer_plugin nvonnxparser nvpars
 
 # 设置输出bin文件路径
 set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin)
-set(CMAKE_CXX_FLAGS "-Wno-error=deprecated-declarations -Wno-deprecated-declarations ")
+set(CMAKE_CXX_FLAGS "-Wno-error=deprecated-declarations -Wno-deprecated-declarations")
 # cuda 和 cudnn 头文件
 include_directories(${CUDA_HOME}/include)
 include_directories(${CUDA_HOME}/targets/x86_64-linux/include)
@@ -32,17 +32,14 @@ include_directories(${TRT_HOME}/sample)
 # OpenCV 头文件
 include_directories(${OpenCV_INCLUDE_DIRS})
 
-# src 子文件夹中头文件
-# include_directories(src/builder)
-# include_directories(src/utils)
 # src 链接库
-add_subdirectory(src/builder)
 add_subdirectory(src/utils)
+add_subdirectory(src/builder)
 add_subdirectory(src/memory)
 add_subdirectory(src/Tensor)
 
 
-set(EXTRA_LIBS ${EXTRA_LIBS} builder utils MixMemory TensorData)
+set(EXTRA_LIBS ${EXTRA_LIBS} TensorData builder MixMemory utils)
 
 link_directories(${CUDA_LIB_DIR} ${TRT_LIB_DIR}) 
 add_executable(${PROJECT_NAME} main.cpp)

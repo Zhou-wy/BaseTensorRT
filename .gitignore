@@ -13,3 +13,4 @@ _deps
 *.engine
 *.onnx
 build/
+bin/

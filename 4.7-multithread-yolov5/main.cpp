@@ -128,5 +128,4 @@ int main(int argc, char const *argv[])
     }
     inference();
     return 0;
-    return 0;
 }

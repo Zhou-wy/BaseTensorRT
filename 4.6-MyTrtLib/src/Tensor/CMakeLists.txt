@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.15)
-set(ProjectName TensorData)
+set(ProjectName TrtTensor)
 project(${ProjectName})
 
 # # 第三方库

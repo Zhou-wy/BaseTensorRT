@@ -41,17 +41,13 @@ add_subdirectory(src/utils)
 add_subdirectory(src/builder)
 add_subdirectory(src/memory)
 add_subdirectory(src/Tensor)
+add_subdirectory(src/infer)
 
-
-set(EXTRA_LIBS ${EXTRA_LIBS} TensorData builder MixMemory utils)
+set(EXTRA_LIBS ${EXTRA_LIBS} TrtInfer TrtTensor TrtBuilder MixMemory utils)
 
 link_directories(${CUDA_LIB_DIR} ${TRT_LIB_DIR}) 
 add_executable(${PROJECT_NAME} main.cpp)
 # target_link_libraries(${PROJECT_NAME} ${LD_CUDA_LIBS} ${EXTRA_LIBS} ${OpenCV_LIBS} ${CUDA_LIB_DIR})
 # 链接动态链接库
 target_link_libraries(${PROJECT_NAME} ${LD_TRT_LIBS} ${LD_CUDA_LIBS} ${OpenCV_LIBS} ${EXTRA_LIBS})
-
-
-
-
 

@@ -4,7 +4,7 @@
  * @Author: zwy
  * @Date: 2022-10-09 13:35:16
  * @LastEditors: zwy
- * @LastEditTime: 2022-10-12 14:57:09
+ * @LastEditTime: 2022-10-12 15:03:41
  */
 
 // tensorRT include
@@ -135,7 +135,6 @@ void inference()
 
 int main()
 {
-
     if (!build_model())
     {
         return -1;

@@ -4,7 +4,7 @@
  * @Author: zwy
  * @Date: 2022-09-24 10:10:45
  * @LastEditors: zwy
- * @LastEditTime: 2022-10-10 10:59:16
+ * @LastEditTime: 2022-10-12 19:22:31
 -->
 # CUDA 基础教程
 
@@ -47,3 +47,5 @@
 ### [3. Unet Segmentation](https://github.com/Zwyywz/BaseTensorRT/tree/main/4.3-unet-seg)
 
 ### [4. My Trt Libs](https://github.com/Zwyywz/BaseTensorRT/tree/main/4.6-MyTrtLib)
+
+### [5. multithread yolov5](https://github.com/Zwyywz/BaseTensorRT/tree/main/4.7-multithread-yolov5)

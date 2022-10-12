@@ -2,7 +2,11 @@ cmake_minimum_required(VERSION 3.15)
 set(PROJECT_NAME TRTInfer)
 
 project(${PROJECT_NAME})
+
 set(CMAKE_CXX_STANDARD 11)
+
+#cmake在编译过程中打印编印信息
+set(CMAKE_VERBOSE_MAKEFILEON ON) 
 
 find_package(OpenCV)
 enable_language(CUDA)

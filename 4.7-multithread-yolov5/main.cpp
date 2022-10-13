@@ -4,7 +4,7 @@
  * @Author: zwy
  * @Date: 2022-10-12 16:06:24
  * @LastEditors: zwy
- * @LastEditTime: 2022-10-12 19:16:16
+ * @LastEditTime: 2022-10-12 22:53:41
  */
 
 // tensorRT include
@@ -98,9 +98,13 @@ static void inference()
     auto yolov5 = YoloV5::create_infer("../workspace/yolov5s.engine");
     cv::Size size = cv::Size(capture.get(cv::CAP_PROP_FRAME_WIDTH), capture.get(cv::CAP_PROP_FRAME_HEIGHT));
     cv::VideoWriter writer;
+    char Fps[32];
+    double t;
     writer.open("../workspace/video-output.mp4", cv::VideoWriter::fourcc('M', 'P', '4', 'V'), 10, size, true);
     while (capture.read(frame))
     {
+        t = (double)cv::getTickCount();
+
         auto boxes = yolov5->commit(frame).get();
         for (auto &box : boxes)
         {
@@ -110,9 +114,17 @@ static void inference()
             auto name = cocolabels[box.class_label];
             auto caption = cv::format("%s %.2f", name, box.confidence);
             int text_width = cv::getTextSize(caption, 0, 1, 2, nullptr).width + 10;
+
             cv::rectangle(frame, cv::Point(box.left - 3, box.top - 33), cv::Point(box.left + text_width, box.top), color, -1);
             cv::putText(frame, caption, cv::Point(box.left, box.top - 5), 0, 1, cv::Scalar::all(0), 2, 16);
         }
+        t = ((double)cv::getTickCount() - t) / cv::getTickFrequency();
+        double fps = 1.0 / t;
+
+        auto fpsString = cv::format("%s %.2f", "FPS:", fps);
+        std::cout << fpsString << std::endl;
+        cv::putText(frame, fpsString, cv::Point(5, 20), 0, 1, cv::Scalar::all(0), 2, 16); // 字体颜色
+
         writer.write(frame);
         cv::waitKey(10);
     }

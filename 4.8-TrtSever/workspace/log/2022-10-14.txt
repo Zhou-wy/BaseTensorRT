@@ -1,0 +1,176 @@
+[2022-10-14 20:38:22][info][main.cpp:138]:Create controller
+[2022-10-14 20:38:23][debug][trt_infer.cpp:31]:Deserialize required 810651 microseconds.
+[2022-10-14 20:38:23][debug][trt_infer.cpp:31]:Allocated persistent device memory of size 39633408
+[2022-10-14 20:38:23][debug][trt_infer.cpp:31]:Allocated activation device memory of size 374656512
+[2022-10-14 20:38:23][debug][trt_infer.cpp:31]:Assigning persistent memory blocks for various profiles
+[2022-10-14 20:38:23][info][trt_infer.cpp:176]:Infer 0x7f8360012e40 detail
+[2022-10-14 20:38:23][info][trt_infer.cpp:177]:	Base device: [ID 0]<GeForce RTX 2080>[arch 7.5][GMEM 6.79 GB/7.79 GB]
+[2022-10-14 20:38:23][info][trt_infer.cpp:178]:	Max Batch Size: 10
+[2022-10-14 20:38:23][info][trt_infer.cpp:179]:	Inputs: 1
+[2022-10-14 20:38:23][info][trt_infer.cpp:183]:		0.images : shape {10 x 3 x 640 x 640}, Float32
+[2022-10-14 20:38:23][info][trt_infer.cpp:186]:	Outputs: 1
+[2022-10-14 20:38:23][info][trt_infer.cpp:190]:		0.output : shape {10 x 25200 x 85}, Float32
+[2022-10-14 20:38:23][info][main.cpp:147]:Create http server to: 0.0.0.0:8090
+[2022-10-14 20:38:23][info][main.cpp:155]:Add controller
+[2022-10-14 20:38:23][info][main.cpp:161]:Access url: http://0.0.0.0:8090
+[2022-10-14 20:38:23][info][main.cpp:167]:
+访问如下地址即可看到效果:
+1. http://0.0.0.0:8090/api/detect              使用自定义写出内容作为response
+
+[2022-10-14 20:38:23][info][main.cpp:169]:按下Ctrl + C结束程序
+[2022-10-14 20:38:40][info][ilogger.cpp:962]:Capture interrupt signal.
+[2022-10-14 20:38:40][info][ilogger.cpp:973]:Loop over.
+[2022-10-14 20:38:40][info][http_server.cpp:1101]:Shutdown http server.
+[2022-10-14 20:38:40][info][yolo.cpp:320]:Engine destroy.
+[2022-10-14 20:38:40][info][ilogger.cpp:962]:Capture interrupt signal.
+[2022-10-14 20:39:13][info][main.cpp:138]:Create controller
+[2022-10-14 20:39:14][info][trt_infer.cpp:176]:Infer 0x7f8b90012e40 detail
+[2022-10-14 20:39:14][info][trt_infer.cpp:177]:	Base device: [ID 0]<GeForce RTX 2080>[arch 7.5][GMEM 6.79 GB/7.79 GB]
+[2022-10-14 20:39:14][info][trt_infer.cpp:178]:	Max Batch Size: 10
+[2022-10-14 20:39:14][info][trt_infer.cpp:179]:	Inputs: 1
+[2022-10-14 20:39:14][info][trt_infer.cpp:183]:		0.images : shape {10 x 3 x 640 x 640}, Float32
+[2022-10-14 20:39:14][info][trt_infer.cpp:186]:	Outputs: 1
+[2022-10-14 20:39:14][info][trt_infer.cpp:190]:		0.output : shape {10 x 25200 x 85}, Float32
+[2022-10-14 20:39:14][info][main.cpp:147]:Create http server to: 0.0.0.0:8090
+[2022-10-14 20:39:14][info][main.cpp:155]:Add controller
+[2022-10-14 20:39:14][info][main.cpp:161]:Access url: http://0.0.0.0:8090
+[2022-10-14 20:39:14][info][main.cpp:167]:
+访问如下地址即可看到效果:
+1. http://0.0.0.0:8090/api/detect              使用自定义写出内容作为response
+
+[2022-10-14 20:39:14][info][main.cpp:169]:按下Ctrl + C结束程序
+[2022-10-14 20:39:21][info][ilogger.cpp:962]:Capture interrupt signal.
+[2022-10-14 20:39:21][info][ilogger.cpp:973]:Loop over.
+[2022-10-14 20:39:21][info][http_server.cpp:1101]:Shutdown http server.
+[2022-10-14 20:39:21][info][yolo.cpp:320]:Engine destroy.
+[2022-10-14 20:39:46][info][main.cpp:138]:Create controller
+[2022-10-14 20:39:47][debug][trt_infer.cpp:31]:Deserialize required 819883 microseconds.
+[2022-10-14 20:39:47][debug][trt_infer.cpp:31]:Allocated persistent device memory of size 39633408
+[2022-10-14 20:39:47][debug][trt_infer.cpp:31]:Allocated activation device memory of size 374656512
+[2022-10-14 20:39:47][debug][trt_infer.cpp:31]:Assigning persistent memory blocks for various profiles
+[2022-10-14 20:39:47][info][trt_infer.cpp:176]:Infer 0x7fa7a4012e40 detail
+[2022-10-14 20:39:47][info][trt_infer.cpp:177]:	Base device: [ID 0]<GeForce RTX 2080>[arch 7.5][GMEM 6.79 GB/7.79 GB]
+[2022-10-14 20:39:47][info][trt_infer.cpp:178]:	Max Batch Size: 10
+[2022-10-14 20:39:47][info][trt_infer.cpp:179]:	Inputs: 1
+[2022-10-14 20:39:47][info][trt_infer.cpp:183]:		0.images : shape {10 x 3 x 640 x 640}, Float32
+[2022-10-14 20:39:47][info][trt_infer.cpp:186]:	Outputs: 1
+[2022-10-14 20:39:47][info][trt_infer.cpp:190]:		0.output : shape {10 x 25200 x 85}, Float32
+[2022-10-14 20:39:47][info][main.cpp:147]:Create http server to: 0.0.0.0:8090
+[2022-10-14 20:39:47][info][main.cpp:155]:Add controller
+[2022-10-14 20:39:47][info][main.cpp:161]:Access url: http://0.0.0.0:8090
+[2022-10-14 20:39:47][info][main.cpp:167]:
+访问如下地址即可看到效果:
+1. http://0.0.0.0:8090/api/detect              使用自定义写出内容作为response
+
+[2022-10-14 20:39:47][info][main.cpp:169]:按下Ctrl + C结束程序
+[2022-10-14 20:39:54][info][ilogger.cpp:962]:Capture interrupt signal.
+[2022-10-14 20:39:54][info][ilogger.cpp:973]:Loop over.
+[2022-10-14 20:39:54][info][http_server.cpp:1101]:Shutdown http server.
+[2022-10-14 20:39:55][info][ilogger.cpp:962]:Capture interrupt signal.
+[2022-10-14 20:39:55][info][yolo.cpp:320]:Engine destroy.
+[2022-10-14 20:50:27][info][main.cpp:138]:Create controller
+[2022-10-14 20:50:28][debug][trt_infer.cpp:31]:Deserialize required 822614 microseconds.
+[2022-10-14 20:50:28][debug][trt_infer.cpp:31]:Allocated persistent device memory of size 39633408
+[2022-10-14 20:50:28][debug][trt_infer.cpp:31]:Allocated activation device memory of size 374656512
+[2022-10-14 20:50:28][debug][trt_infer.cpp:31]:Assigning persistent memory blocks for various profiles
+[2022-10-14 20:50:28][info][trt_infer.cpp:176]:Infer 0x7fcba4012e40 detail
+[2022-10-14 20:50:28][info][trt_infer.cpp:177]:	Base device: [ID 0]<GeForce RTX 2080>[arch 7.5][GMEM 6.79 GB/7.79 GB]
+[2022-10-14 20:50:28][info][trt_infer.cpp:178]:	Max Batch Size: 10
+[2022-10-14 20:50:28][info][trt_infer.cpp:179]:	Inputs: 1
+[2022-10-14 20:50:28][info][trt_infer.cpp:183]:		0.images : shape {10 x 3 x 640 x 640}, Float32
+[2022-10-14 20:50:28][info][trt_infer.cpp:186]:	Outputs: 1
+[2022-10-14 20:50:28][info][trt_infer.cpp:190]:		0.output : shape {10 x 25200 x 85}, Float32
+[2022-10-14 20:50:28][info][main.cpp:147]:Create http server to: 0.0.0.0:8090
+[2022-10-14 20:50:28][info][main.cpp:155]:Add controller
+[2022-10-14 20:50:28][info][main.cpp:161]:Access url: http://0.0.0.0:8090
+[2022-10-14 20:50:28][info][main.cpp:167]:
+访问如下地址即可看到效果:
+1. http://0.0.0.0:8090/api/detect              使用自定义写出内容作为response
+
+[2022-10-14 20:50:28][info][main.cpp:169]:按下Ctrl + C结束程序
+[2022-10-14 20:50:36][info][ilogger.cpp:962]:Capture interrupt signal.
+[2022-10-14 20:50:36][info][ilogger.cpp:973]:Loop over.
+[2022-10-14 20:50:36][info][http_server.cpp:1101]:Shutdown http server.
+[2022-10-14 20:50:36][info][ilogger.cpp:962]:Capture interrupt signal.
+[2022-10-14 20:50:36][info][yolo.cpp:320]:Engine destroy.
+[2022-10-14 20:53:40][info][main.cpp:138]:Create controller
+[2022-10-14 20:53:41][debug][trt_infer.cpp:31]:Deserialize required 823642 microseconds.
+[2022-10-14 20:53:41][debug][trt_infer.cpp:31]:Allocated persistent device memory of size 39633408
+[2022-10-14 20:53:41][debug][trt_infer.cpp:31]:Allocated activation device memory of size 374656512
+[2022-10-14 20:53:41][debug][trt_infer.cpp:31]:Assigning persistent memory blocks for various profiles
+[2022-10-14 20:53:41][info][trt_infer.cpp:176]:Infer 0x7f07ac012e40 detail
+[2022-10-14 20:53:41][info][trt_infer.cpp:177]:	Base device: [ID 0]<GeForce RTX 2080>[arch 7.5][GMEM 6.79 GB/7.79 GB]
+[2022-10-14 20:53:41][info][trt_infer.cpp:178]:	Max Batch Size: 10
+[2022-10-14 20:53:41][info][trt_infer.cpp:179]:	Inputs: 1
+[2022-10-14 20:53:41][info][trt_infer.cpp:183]:		0.images : shape {10 x 3 x 640 x 640}, Float32
+[2022-10-14 20:53:41][info][trt_infer.cpp:186]:	Outputs: 1
+[2022-10-14 20:53:41][info][trt_infer.cpp:190]:		0.output : shape {10 x 25200 x 85}, Float32
+[2022-10-14 20:53:41][info][main.cpp:147]:Create http server to: 0.0.0.0:8090
+[2022-10-14 20:53:41][info][main.cpp:155]:Add controller
+[2022-10-14 20:53:41][info][main.cpp:161]:Access url: http://0.0.0.0:8090
+[2022-10-14 20:53:41][info][main.cpp:167]:
+访问如下地址即可看到效果:
+1. http://0.0.0.0:8090/api/detect              使用自定义写出内容作为response
+
+[2022-10-14 20:53:41][info][main.cpp:169]:按下Ctrl + C结束程序
+[2022-10-14 20:54:00][info][ilogger.cpp:962]:Capture interrupt signal.
+[2022-10-14 20:54:00][info][ilogger.cpp:973]:Loop over.
+[2022-10-14 20:54:00][info][http_server.cpp:1101]:Shutdown http server.
+[2022-10-14 20:54:00][info][yolo.cpp:320]:Engine destroy.
+[2022-10-14 20:56:25][info][main.cpp:138]:Create controller
+[2022-10-14 20:56:30][debug][trt_infer.cpp:31]:Deserialize required 2190209 microseconds.
+[2022-10-14 20:56:30][debug][trt_infer.cpp:31]:Allocated persistent device memory of size 39633408
+[2022-10-14 20:56:31][debug][trt_infer.cpp:31]:Allocated activation device memory of size 374656512
+[2022-10-14 20:56:31][debug][trt_infer.cpp:31]:Assigning persistent memory blocks for various profiles
+[2022-10-14 20:56:31][info][trt_infer.cpp:176]:Infer 0x7f0a94012e40 detail
+[2022-10-14 20:56:31][info][trt_infer.cpp:177]:	Base device: [ID 0]<GeForce RTX 2080>[arch 7.5][GMEM 6.79 GB/7.79 GB]
+[2022-10-14 20:56:31][info][trt_infer.cpp:178]:	Max Batch Size: 10
+[2022-10-14 20:56:31][info][trt_infer.cpp:179]:	Inputs: 1
+[2022-10-14 20:56:31][info][trt_infer.cpp:183]:		0.images : shape {10 x 3 x 640 x 640}, Float32
+[2022-10-14 20:56:31][info][trt_infer.cpp:186]:	Outputs: 1
+[2022-10-14 20:56:31][info][trt_infer.cpp:190]:		0.output : shape {10 x 25200 x 85}, Float32
+[2022-10-14 20:56:31][info][main.cpp:147]:Create http server to: 0.0.0.0:8090
+[2022-10-14 20:56:31][info][main.cpp:155]:Add controller
+[2022-10-14 20:56:31][info][main.cpp:161]:Access url: http://0.0.0.0:8090
+[2022-10-14 20:56:31][info][main.cpp:167]:
+访问如下地址即可看到效果:
+1. http://0.0.0.0:8090/api/detect              使用自定义写出内容作为response
+
+[2022-10-14 20:56:31][info][main.cpp:169]:按下Ctrl + C结束程序
+[2022-10-14 20:56:42][info][ilogger.cpp:962]:Capture interrupt signal.
+[2022-10-14 20:56:42][info][ilogger.cpp:973]:Loop over.
+[2022-10-14 20:56:42][info][http_server.cpp:1101]:Shutdown http server.
+[2022-10-14 20:56:42][info][ilogger.cpp:962]:Capture interrupt signal.
+[2022-10-14 20:56:42][info][ilogger.cpp:962]:Capture interrupt signal.
+[2022-10-14 20:56:43][info][ilogger.cpp:962]:Capture interrupt signal.
+[2022-10-14 20:56:43][info][yolo.cpp:320]:Engine destroy.
+[2022-10-14 20:56:43][info][ilogger.cpp:962]:Capture interrupt signal.
+[2022-10-14 20:56:43][info][ilogger.cpp:962]:Capture interrupt signal.
+[2022-10-14 20:58:13][info][main.cpp:138]:Create controller
+[2022-10-14 20:58:14][debug][trt_infer.cpp:31]:Deserialize required 768951 microseconds.
+[2022-10-14 20:58:14][debug][trt_infer.cpp:31]:Allocated persistent device memory of size 39633408
+[2022-10-14 20:58:14][debug][trt_infer.cpp:31]:Allocated activation device memory of size 374656512
+[2022-10-14 20:58:14][debug][trt_infer.cpp:31]:Assigning persistent memory blocks for various profiles
+[2022-10-14 20:58:14][info][trt_infer.cpp:176]:Infer 0x7f6f60012e40 detail
+[2022-10-14 20:58:14][info][trt_infer.cpp:177]:	Base device: [ID 0]<GeForce RTX 2080>[arch 7.5][GMEM 6.79 GB/7.79 GB]
+[2022-10-14 20:58:14][info][trt_infer.cpp:178]:	Max Batch Size: 10
+[2022-10-14 20:58:14][info][trt_infer.cpp:179]:	Inputs: 1
+[2022-10-14 20:58:14][info][trt_infer.cpp:183]:		0.images : shape {10 x 3 x 640 x 640}, Float32
+[2022-10-14 20:58:14][info][trt_infer.cpp:186]:	Outputs: 1
+[2022-10-14 20:58:14][info][trt_infer.cpp:190]:		0.output : shape {10 x 25200 x 85}, Float32
+[2022-10-14 20:58:14][info][main.cpp:147]:Create http server to: 0.0.0.0:8090
+[2022-10-14 20:58:14][info][main.cpp:155]:Add controller
+[2022-10-14 20:58:14][info][main.cpp:161]:Access url: http://0.0.0.0:8090
+[2022-10-14 20:58:14][info][main.cpp:167]:
+访问如下地址即可看到效果:
+1. http://0.0.0.0:8090/api/detect              使用自定义写出内容作为response
+
+[2022-10-14 20:58:14][info][main.cpp:169]:按下Ctrl + C结束程序
+[2022-10-14 20:58:19][info][http_server.cpp:955]:Found match: /api/detect/ [GET] -> /api/detect/ [*]
+[2022-10-14 20:58:32][info][http_server.cpp:934]:Found match: /api/detectBase64Image/ [POST] -> [/]
+[2022-10-14 20:58:43][info][ilogger.cpp:962]:Capture interrupt signal.
+[2022-10-14 20:58:43][info][ilogger.cpp:973]:Loop over.
+[2022-10-14 20:58:43][info][http_server.cpp:1101]:Shutdown http server.
+[2022-10-14 20:58:43][info][ilogger.cpp:962]:Capture interrupt signal.
+[2022-10-14 20:58:43][info][yolo.cpp:320]:Engine destroy.
+[2022-10-14 20:58:43][info][ilogger.cpp:962]:Capture interrupt signal.

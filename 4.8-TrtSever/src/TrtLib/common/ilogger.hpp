@@ -1,11 +1,3 @@
-/*
- * @description:
- * @version:
- * @Author: zwy
- * @Date: 2022-10-13 09:17:24
- * @LastEditors: zwy
- * @LastEditTime: 2022-10-13 09:17:28
- */
 
 #ifndef ILOGGER_HPP
 #define ILOGGER_HPP
@@ -102,7 +94,7 @@ namespace iLogger
     void __log_func(const char *file, int line, LogLevel level, const char *fmt, ...);
     void destroy_logger();
 
-    string base64_decode(const string &base64);
+    vector<uint8_t> base64_decode(const string &base64);
     string base64_encode(const void *data, size_t size);
 
     inline int upbound(int n, int align = 32) { return (n + align - 1) / align * align; }

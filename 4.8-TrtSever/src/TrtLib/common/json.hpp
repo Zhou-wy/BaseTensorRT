@@ -2186,9 +2186,6 @@ JSON_API JSONCPP_OSTREAM& operator<<(JSONCPP_OSTREAM&, const Value& root);
 
 Value parse_string(const std::string& jsonstring);
 Value parse_file(const std::string& file);
-float get_float(const Json::Value& j, const std::string& member, float default_value = 0);
-int get_int(const Json::Value& j, const std::string& member, int default_value = 0);
-std::string get_string(const Json::Value& j, const std::string& member, const std::string& default_value = "");
 
 } // namespace Json
 

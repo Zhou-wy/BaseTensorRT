@@ -1769,7 +1769,6 @@ ptrdiff_t Value::getOffsetLimit() const { return limit_; }
 
 JSONCPP_STRING Value::toStyledString() const {
   StreamWriterBuilder builder;
-  builder["commentStyle"] = "None";
 
   JSONCPP_STRING out = this->hasComment(commentBefore) ? "\n" : "";
   out += Json::writeString(builder, *this);
@@ -3567,7 +3566,8 @@ bool OurReader::decodeNumber(Token& token, Value& decoded) {
     ++current;
   // TODO: Help the compiler do the div and mod at compile time or get rid of them.
   Value::LargestUInt maxIntegerValue =
-      isNegative ? Value::LargestUInt(-Value::minLargestInt) : Value::maxLargestUInt;
+      isNegative ? Value::LargestUInt(-Value::minLargestInt)
+                 : Value::maxLargestUInt;
   Value::LargestUInt threshold = maxIntegerValue / 10;
   Value::LargestUInt value = 0;
   while (current < token.end_) {
@@ -5076,8 +5076,7 @@ void BuiltStyledStreamWriter::writeArrayValue(Value const& value) {
 
 bool BuiltStyledStreamWriter::isMultineArray(Value const& value) {
   ArrayIndex const size = value.size();
-  //bool isMultiLine = size * 3 >= rightMargin_;
-  bool isMultiLine = false;
+  bool isMultiLine = size * 3 >= rightMargin_;
   childValues_.clear();
   for (ArrayIndex index = 0; index < size && !isMultiLine; ++index) {
     Value const& childValue = value[index];
@@ -5097,7 +5096,7 @@ bool BuiltStyledStreamWriter::isMultineArray(Value const& value) {
       lineLength += static_cast<ArrayIndex>(childValues_[index].length());
     }
     addChildValues_ = false;
-    //isMultiLine = isMultiLine || lineLength >= rightMargin_;
+    isMultiLine = isMultiLine || lineLength >= rightMargin_;
   }
   return isMultiLine;
 }
@@ -5298,27 +5297,6 @@ Value parse_file(const std::string& file){
   }catch(...){
   }
   return value;
-}
-
-float get_float(const Json::Value& j, const std::string& member, float default_value){
-  if(j.isMember(member) && !j[member].isNull()){
-    return j[member].asFloat();
-  }
-  return default_value;
-}
-
-int get_int(const Json::Value& j, const std::string& member, int default_value){
-  if(j.isMember(member) && !j[member].isNull()){
-    return j[member].asInt();
-  }
-  return default_value;
-}
-
-std::string get_string(const Json::Value& j, const std::string& member, const std::string& default_value){
-  if(j.isMember(member) && !j[member].isNull()){
-    return j[member].asString();
-  }
-  return default_value;
 }
 
 } // namespace Json

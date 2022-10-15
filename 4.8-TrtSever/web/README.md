@@ -1,3 +1,11 @@
+<!--
+ * @description: 
+ * @version: 
+ * @Author: zwy
+ * @Date: 2022-10-13 20:24:12
+ * @LastEditors: zwy
+ * @LastEditTime: 2022-10-14 15:35:08
+-->
 # 关于Web项目自定义开发
 1. 下载node-v12.4.0-linux-x64
     - windows下请模拟配置

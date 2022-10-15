@@ -4,7 +4,7 @@
  * @Author: zwy
  * @Date: 2022-10-13 09:13:25
  * @LastEditors: zwy
- * @LastEditTime: 2022-10-15 09:18:57
+ * @LastEditTime: 2022-10-15 21:02:52
  */
 
 // tensorRT include
@@ -36,6 +36,8 @@
 
 using namespace std;
 
+const string engine_file = "../workspace/yolov5s.engine";
+const string onnx_file = "../workspace/yolov5s.onnx";
 static const char *cocolabels[] = {
     "person", "bicycle", "car", "motorcycle", "airplane",
     "bus", "train", "truck", "boat", "traffic light", "fire hydrant",
@@ -51,6 +53,49 @@ static const char *cocolabels[] = {
     "oven", "toaster", "sink", "refrigerator", "book", "clock", "vase",
     "scissors", "teddy bear", "hair drier", "toothbrush"};
 
+class InferInstance
+{
+public:
+    bool startup()
+    {
+        infer_ = get_infer(Yolo::Type::V5);
+        return infer_ != nullptr;
+    }
+
+    bool inference(const cv::Mat &image_input, Yolo::BoxArray &boxarray)
+    {
+
+        if (infer_ == nullptr)
+        {
+            INFOE("Not Initialize.");
+            return false;
+        }
+
+        if (image_input.empty())
+        {
+            INFOE("Image is empty.");
+            return false;
+        }
+        boxarray = infer_->commit(image_input).get();
+        return true;
+    }
+
+private:
+    shared_ptr<Yolo::Infer> get_infer(Yolo::Type type)
+    {
+        if (!iLogger::exists(engine_file))
+        {
+            TRT::compile(
+                TRT::Mode::FP32,
+                10,
+                onnx_file,
+                engine_file);
+        }
+        return Yolo::create_infer(engine_file, type, 0, 0.25, 0.45);
+    }
+    shared_ptr<Yolo::Infer> infer_;
+};
+
 class LogicalController : public Controller
 {
     SetupController(LogicalController);
@@ -60,54 +105,49 @@ public:
 
 public:
     DefRequestMapping(detect);
-
-public:
     DefRequestMapping(getCustom);
     DefRequestMapping(getReturn);
     DefRequestMapping(getBinary);
     DefRequestMapping(getFile);
     DefRequestMapping(putBase64Image);
+    DefRequestMapping(detectBase64Image);
 
 private:
-    shared_ptr<Yolo::Infer> yolo_;
+    shared_ptr<InferInstance> infer_instance_;
 };
 
-bool LogicalController::startup()
-{
-    yolo_ = Yolo::create_infer("../workspace/yolov5s.engine", Yolo::Type::V5, 0, 0.25, 0.45);
-    return yolo_ != nullptr;
-}
-
+/// ######################################
 Json::Value LogicalController::detect(const Json::Value &param)
 {
-
     auto session = get_current_session();
-    if (session->request.body.empty())
-        return failure("Request body is empty");
+    auto image_data = iLogger::base64_decode(session->request.body);
+    if (image_data.empty())
+        return failure("Image is required");
 
-    // if base64
-    // iLogger::base64_decode();
-    cv::Mat imdata(1, session->request.body.size(), CV_8U, (char *)session->request.body.data());
-    cv::Mat image = cv::imdecode(imdata, 1);
-    if (image.empty())
-        return failure("Image decode failed");
+    auto image = cv::imdecode(image_data, 1);
+    if (image_data.empty())
+        return failure("Image is empty");
 
-    auto boxes = yolo_->commit(image).get();
-    Json::Value out(Json::arrayValue);
-    for (int i = 0; i < boxes.size(); ++i)
+    Yolo::BoxArray boxarray;
+    if (!this->infer_instance_->inference(image, boxarray))
+        return failure("Server error1");
+
+    Json::Value boxarray_json(Json::arrayValue);
+    for (auto &box : boxarray)
     {
-        auto &item = boxes[i];
-        Json::Value itemj;
-        itemj["left"] = item.left;
-        itemj["top"] = item.top;
-        itemj["right"] = item.right;
-        itemj["bottom"] = item.bottom;
-        itemj["class_label"] = item.class_label;
-        itemj["confidence"] = item.confidence;
-        out.append(itemj);
+        Json::Value item(Json::objectValue);
+        item["left"] = box.left;
+        item["top"] = box.top;
+        item["right"] = box.right;
+        item["bottom"] = box.bottom;
+        item["confidence"] = box.confidence;
+        item["class_label"] = box.class_label;
+        item["class_name"] = cocolabels[box.class_label];
+        boxarray_json.append(item);
     }
-    return success(out);
+    return success(boxarray_json);
 }
+
 Json::Value LogicalController::putBase64Image(const Json::Value &param)
 {
 
@@ -124,6 +164,38 @@ Json::Value LogicalController::putBase64Image(const Json::Value &param)
     auto image_data = iLogger::base64_decode(session->request.body);
     iLogger::save_file("base_decode.jpg", image_data);
     return success();
+}
+
+Json::Value LogicalController::detectBase64Image(const Json::Value &param)
+{
+
+    auto session = get_current_session();
+    auto image_data = iLogger::base64_decode(session->request.body);
+    if (image_data.empty())
+        return failure("Image is required");
+
+    auto image = cv::imdecode(image_data, 1);
+    if (image_data.empty())
+        return failure("Image is empty");
+
+    Yolo::BoxArray boxarray;
+    if (!this->infer_instance_->inference(image, boxarray))
+        return failure("Server error1");
+
+    Json::Value boxarray_json(Json::arrayValue);
+    for (auto &box : boxarray)
+    {
+        Json::Value item(Json::objectValue);
+        item["left"] = box.left;
+        item["top"] = box.top;
+        item["right"] = box.right;
+        item["bottom"] = box.bottom;
+        item["confidence"] = box.confidence;
+        item["class_label"] = box.class_label;
+        item["class_name"] = cocolabels[box.class_label];
+        boxarray_json.append(item);
+    }
+    return success(boxarray_json);
 }
 
 Json::Value LogicalController::getCustom(const Json::Value &param)
@@ -163,38 +235,19 @@ Json::Value LogicalController::getFile(const Json::Value &param)
     session->response.write_file("img.jpg");
     return success();
 }
-
-static bool exists(const string &path)
+/// ######################################
+bool LogicalController::startup()
 {
 
-#ifdef _WIN32
-    return ::PathFileExistsA(path.c_str());
-#else
-    return access(path.c_str(), R_OK) == 0;
-#endif
-}
-
-// 上一节的代码
-static bool build_model()
-{
-
-    if (exists("../workspace/yolov5s.engine"))
+    infer_instance_.reset(new InferInstance());
+    if (!infer_instance_->startup())
     {
-        printf("../workspace/yolov5s.engine has exists.\n");
-        return true;
+        infer_instance_.reset();
     }
-
-    // SimpleLogger::set_log_level(SimpleLogger::LogLevel::Verbose);
-    TRT::compile(
-        TRT::Mode::FP32,
-        10,
-        "../workspace/yolov5s.onnx",
-        "../workspace/yolov5s.engine");
-    INFO("Done.");
-    return true;
+    return infer_instance_ != nullptr;
 }
 
-int start_http(int port = 8090)
+int test_http(int port = 8090)
 {
 
     INFO("Create controller");
@@ -211,13 +264,10 @@ int start_http(int port = 8090)
     auto server = createHttpServer(address, 32);
     if (!server)
         return -1;
-
     server->verbose();
 
     INFO("Add controller");
     server->add_controller("/api", logical_controller);
-
-    // 这是一个vue的项目
     server->add_controller("/", create_redirect_access_controller("./web"));
     server->add_controller("/static", create_file_access_controller("./"));
     INFO("Access url: http://%s", address.c_str());
@@ -231,22 +281,14 @@ int start_http(int port = 8090)
         "4. http://%s/api/getFile                使用自定义写出文件路径作为response\n"
         "5. http://%s/api/putBase64Image         通过提交base64图像数据进行解码后储存\n"
         "6. http://%s/static/img.jpg             直接访问静态文件处理的controller,具体请看函数说明\n"
-        "7. http://%s/api/detect                 访问web页面,vue开发的",
-
+        "7. http://%s                            访问web页面,vue开发的",
         address.c_str(), address.c_str(), address.c_str(), address.c_str(), address.c_str(), address.c_str(), address.c_str());
 
     INFO("按下Ctrl + C结束程序");
     return iLogger::while_loop();
 }
 
-int main()
+int main(int argc, char **argv)
 {
-    iLogger::set_log_level(iLogger::LogLevel::Debug);
-    iLogger::set_logger_save_directory("../workspace/log");
-    // 新的实现
-    if (!build_model())
-    {
-        return -1;
-    }
-    return start_http();
+    return test_http();
 }

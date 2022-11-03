@@ -4,14 +4,11 @@
  * @Author: zwy
  * @Date: 2022-10-13 09:13:25
  * @LastEditors: zwy
- * @LastEditTime: 2022-10-15 21:02:52
+ * @LastEditTime: 2022-10-19 16:44:23
  */
 
 // tensorRT include
-// 编译用的头文件
 #include <NvInfer.h>
-
-// 推理用的运行时头文件
 #include <NvInferRuntime.h>
 
 // cuda include
@@ -58,14 +55,14 @@ class InferInstance
 public:
     bool startup()
     {
-        infer_ = get_infer(Yolo::Type::V5);
-        return infer_ != nullptr;
+        yoloIns = get_infer(Yolo::Type::V5);
+        return yoloIns != nullptr;
     }
 
     bool inference(const cv::Mat &image_input, Yolo::BoxArray &boxarray)
     {
 
-        if (infer_ == nullptr)
+        if (yoloIns == nullptr)
         {
             INFOE("Not Initialize.");
             return false;
@@ -76,7 +73,7 @@ public:
             INFOE("Image is empty.");
             return false;
         }
-        boxarray = infer_->commit(image_input).get();
+        boxarray = yoloIns->commit(image_input).get();
         return true;
     }
 
@@ -91,9 +88,13 @@ private:
                 onnx_file,
                 engine_file);
         }
+        else
+        {
+            INFOW("%s has been created!", engine_file.c_str());
+        }
         return Yolo::create_infer(engine_file, type, 0, 0.25, 0.45);
     }
-    shared_ptr<Yolo::Infer> infer_;
+    shared_ptr<Yolo::Infer> yoloIns;
 };
 
 class LogicalController : public Controller
@@ -200,7 +201,6 @@ Json::Value LogicalController::detectBase64Image(const Json::Value &param)
 
 Json::Value LogicalController::getCustom(const Json::Value &param)
 {
-
     auto session = get_current_session();
     const char *output = "hello http server";
     session->response.write_binary(output, strlen(output));
@@ -285,6 +285,7 @@ int test_http(int port = 8090)
         address.c_str(), address.c_str(), address.c_str(), address.c_str(), address.c_str(), address.c_str(), address.c_str());
 
     INFO("按下Ctrl + C结束程序");
+    // iLogger::save_file();
     return iLogger::while_loop();
 }
 

@@ -1,6 +1,8 @@
 #include <iostream>
 #include <string>
 #include <cuda.h>
+#include <cuda_runtime.h>
+
 
 int main(int argc, char const *argv[])
 {

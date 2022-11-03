@@ -49,4 +49,3 @@ link_directories(${CUDA_LIB_DIR} ${TRT_LIB_DIR})
 add_executable(${PROJECT_NAME} main.cpp)
 # 链接动态链接库
 target_link_libraries(${PROJECT_NAME} ${LD_TRT_LIBS} ${LD_CUDA_LIBS} ${OpenCV_LIBS} ${EXTRA_LIBS})
-

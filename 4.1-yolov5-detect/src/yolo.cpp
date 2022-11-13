@@ -4,7 +4,7 @@
  * @Author: zwy
  * @Date: 2022-10-04 12:17:56
  * @LastEditors: zwy
- * @LastEditTime: 2022-10-04 16:42:45
+ * @LastEditTime: 2022-11-11 16:02:45
  */
 
 #include "yolo.h"
@@ -195,7 +195,7 @@ std::vector<std::vector<float>> NMS(std::vector<std::vector<float>> &bboxes, flo
 {
     std::sort(bboxes.begin(), bboxes.end(), [](std::vector<float> &a, std::vector<float> &b)
               { return a[5] > b[5]; });
-    std::vector<bool> remove_flags(bboxes.size());
+    std::vector<bool> remove_flags(bboxes.size()); 
     std::vector<std::vector<float>> result_box;
     result_box.reserve(bboxes.size());
 

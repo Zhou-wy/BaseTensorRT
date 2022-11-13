@@ -4,7 +4,7 @@
  * @Author: zwy
  * @Date: 2022-10-09 13:35:16
  * @LastEditors: zwy
- * @LastEditTime: 2022-10-12 15:03:41
+ * @LastEditTime: 2022-11-10 14:31:35
  */
 
 // tensorRT include
@@ -127,7 +127,7 @@ void inference()
     int num_classes = output->size(1);
     float *prob = output->cpu<float>();
     int predict_label = std::max_element(prob, prob + num_classes) - prob;
-    auto labels = load_labels("labels.imagenet.txt");
+    auto labels = load_labels("../workspace/labels.imagenet.txt");
     auto predict_name = labels[predict_label];
     float confidence = prob[predict_label];
     printf("Predict: %s, confidence = %f, label = %d\n", predict_name.c_str(), confidence, predict_label);

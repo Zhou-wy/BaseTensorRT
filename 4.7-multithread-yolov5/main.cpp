@@ -4,7 +4,7 @@
  * @Author: zwy
  * @Date: 2022-10-12 16:06:24
  * @LastEditors: zwy
- * @LastEditTime: 2022-10-12 22:53:41
+ * @LastEditTime: 2022-11-10 15:53:21
  */
 
 // tensorRT include
@@ -31,6 +31,7 @@
 #include <functional>
 #include <unistd.h>
 #include <opencv2/opencv.hpp>
+#include <chrono>
 
 #include "src/TensorRT/builder/trt_builder.hpp"
 #include "src/TensorRT/utils/simple_logger.hpp"
@@ -82,6 +83,71 @@ static bool build_model()
         1 << 28);
     INFO("Done.");
     return true;
+}
+
+void inference_video()
+{
+    cv::Mat image, output;
+    cout << CV_VERSION << endl;
+    srand((unsigned)time(NULL));
+
+    const string videoStreamAddress = "rtsp://admin:admin123@192.168.0.213:554/cam/realmonitor?channel=1&subtype=0";
+    /*
+    格式说明：
+    1、username: 设备登录用户名。例如admin。`
+    2、password: 设备登录密码。例如admin123。
+    3、ip: 设备IP地址。例如192.168.1.108
+    4、port: 端口号默认为554，若为默认可不填写。
+    5、channel: 通道号，起始为1。例如通道2，则为channel=2。
+    6、subtype: 码流类型，主码流为0（即subtype=0），辅码流为1（即subtype=1）。
+    */
+
+    cv::VideoCapture cap = cv::VideoCapture(videoStreamAddress);
+
+    auto yolov5 = YoloV5::create_infer("../workspace/yolov5s.engine");
+    cv::Size size = cv::Size(cap.get(cv::CAP_PROP_FRAME_WIDTH), cap.get(cv::CAP_PROP_FRAME_HEIGHT));
+    char Fps[32];
+
+    if (!cap.isOpened())
+    {
+        cout << "Error opening video stream or file" << endl;
+        return;
+    }
+    else
+    {
+        cout << "success" << endl;
+    }
+
+    while (cap.read(image))
+    {
+        auto t = cv::getTickCount();
+        auto boxes = yolov5->commit(image).get();
+
+        for (auto &box : boxes)
+        {
+            cv::Scalar color(0, 255, 0);
+            cv::rectangle(image, cv::Point(box.left, box.top), cv::Point(box.right, box.bottom), color, 3);
+
+            auto name = cocolabels[box.class_label];
+            auto caption = cv::format("%s %.2f", name, box.confidence);
+            int text_width = cv::getTextSize(caption, 0, 1, 2, nullptr).width + 10;
+
+            cv::rectangle(image, cv::Point(box.left - 3, box.top - 33), cv::Point(box.left + text_width, box.top), color, -1);
+            cv::putText(image, caption, cv::Point(box.left, box.top - 5), 0, 1, cv::Scalar::all(0), 2, 16);
+        }
+        auto d = cv::getTickCount();
+        // double spendTime = (d - t) * 1000 / cv::getTickFrequency();
+        double fps = cv::getTickFrequency() / (d - t);
+
+        auto fpsString = cv::format("%s %.2f", "FPS:", fps);
+        std::cout << fpsString << std::endl;
+        cv::putText(image, fpsString, cv::Point(5, 20), 0, 1, cv::Scalar::all(0), 2, 16); // 字体颜色
+
+        cv::namedWindow("Output Window");
+        cv::imshow("Output Window", image);
+        if (cv::waitKey(1) >= 0)
+            break;
+    }
 }
 
 static void inference()
@@ -138,6 +204,6 @@ int main(int argc, char const *argv[])
     {
         return -1;
     }
-    inference();
+    inference_video();
     return 0;
 }

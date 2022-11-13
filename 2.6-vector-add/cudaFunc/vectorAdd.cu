@@ -40,6 +40,7 @@ void initDevice(int devNum)
     printf("Using device %d: %s\n", dev, deviceProp.name);
     checkRuntime(cudaSetDevice(dev));
 }
+
 void checkResult(float *hostRef, float *gpuRef, const int N)
 {
     double epsilon = 1.0E-8;

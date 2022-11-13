@@ -4,7 +4,7 @@
  * @Author: zwy
  * @Date: 2022-10-04 20:38:28
  * @LastEditors: zwy
- * @LastEditTime: 2022-10-04 23:01:25
+ * @LastEditTime: 2022-11-10 15:15:24
  */
 #include "yolox.h"
 
@@ -244,7 +244,7 @@ bool inference(cv::Mat &image, const std::string &trt_model_file, TRTLogger &log
 
     cv::Mat input_image(input_height, input_width, CV_8UC3);
     cv::warpAffine(image, input_image, m2x3_i2d, input_image.size(), cv::INTER_LINEAR, cv::BORDER_CONSTANT, cv::Scalar::all(114));
-    cv::imwrite("../workspace/input-image.jpg", input_image);
+    // cv::imwrite("../workspace/input-image.jpg", input_image);
 
     int image_area = input_image.cols * input_image.rows;
     unsigned char *pimage = input_image.data;
@@ -378,7 +378,7 @@ bool inference(cv::Mat &image, const std::string &trt_model_file, TRTLogger &log
         cv::rectangle(image, cv::Point(left - 3, top - 33), cv::Point(left + text_width, top), color, -1);
         cv::putText(image, caption, cv::Point(left, top - 5), 0, 1, cv::Scalar::all(0), 2, 16);
     }
-    cv::imwrite("../workspace/image-output.jpg", image);
+    // cv::imwrite("../workspace/image-output.jpg", image);
 
     checkRuntime(cudaStreamDestroy(stream));
     checkRuntime(cudaFreeHost(input_data_host));

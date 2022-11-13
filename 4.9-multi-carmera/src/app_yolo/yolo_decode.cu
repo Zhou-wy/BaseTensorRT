@@ -78,7 +78,7 @@ namespace Yolo{
         return c_area / (a_area + b_area - c_area);
     }
 
-    static __global__ void nms_kernel(float* bboxes, int max_objects, float threshold){
+    static __global__ void  nms_kernel(float* bboxes, int max_objects, float threshold){
 
         int position = (blockDim.x * blockIdx.x + threadIdx.x);
         int count = min((int)*bboxes, max_objects);

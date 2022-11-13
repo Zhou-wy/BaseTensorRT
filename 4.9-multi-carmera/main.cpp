@@ -4,7 +4,7 @@
  * @Author: zwy
  * @Date: 2022-10-13 09:13:25
  * @LastEditors: zwy
- * @LastEditTime: 2022-11-12 19:02:40
+ * @LastEditTime: 2022-11-13 16:25:05
  */
 
 // tensorRT include
@@ -33,8 +33,8 @@
 
 using namespace std;
 
-const string engine_file = "../workspace/yolov5s.engine";
-const string onnx_file = "../workspace/yolov5s.onnx";
+const string engine_file = "workspace/yolov5s.engine";
+const string onnx_file = "workspace/yolov5s.onnx";
 static const char *cocolabels[] = {
     "person", "bicycle", "car", "motorcycle", "airplane",
     "bus", "train", "truck", "boat", "traffic light", "fire hydrant",
@@ -390,23 +390,19 @@ int main(int argc, char **argv)
         INFOE("Error opening video stream or file");
         return -1;
     }
-    else
-    {
-        INFO("success");
-    }
     while (cap.read(image))
     {
         Yolo::BoxArray bbox;
         Ins.inference(image, bbox);
         for (auto &box : bbox)
         {
-            // cv::rectangle(image, cv::Point2d(box.left, box.top), cv::Point2d(box.right, box.bottom), cv::Scalar(color_list[box.class_label][0], color_list[box.class_label][1], color_list[box.class_label][2]), 3, 8, 0);
-            // auto caption = cv::format("%s %.3f", cocolabels[box.class_label], box.confidence);
-            // cv::putText(image, caption, cv::Point(box.left, box.top - 5), 0, 1, cv::Scalar(color_list[box.class_label][0], color_list[box.class_label][1], color_list[box.class_label][2]), 2, 16);
-            INFO("name: %s , Box:[%.2f, %.2f, %.2f, %.2f], confidence : %.3f", cocolabels[box.class_label], box.left, box.top, box.right, box.bottom, box.confidence);
+            cv::rectangle(image, cv::Point2d(box.left, box.top), cv::Point2d(box.right, box.bottom), cv::Scalar(color_list[box.class_label][0], color_list[box.class_label][1], color_list[box.class_label][2]), 3, 8, 0);
+            auto caption = cv::format("%s %.3f", cocolabels[box.class_label], box.confidence);
+            cv::putText(image, caption, cv::Point(box.left, box.top - 5), 0, 1, cv::Scalar(color_list[box.class_label][0], color_list[box.class_label][1], color_list[box.class_label][2]), 2, 16);
+            // INFO("name: %s , Box:[%.2f, %.2f, %.2f, %.2f], confidence : %.3f", cocolabels[box.class_label], box.left, box.top, box.right, box.bottom, box.confidence);
         }
-        // cv::namedWindow("Output Window");
-        // imshow("Output Window", image);
+        cv::namedWindow("Output Window");
+        imshow("Output Window", image);
 
         if (cv::waitKey(1) >= 0)
             break;

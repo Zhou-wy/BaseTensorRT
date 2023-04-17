@@ -7,12 +7,15 @@
                 "${workspaceFolder}/src/app_yolo/**",
                 "${workspaceFolder}/src/app_http/**",
                 "${workspaceFolder}/src/TrtLib/**",
+                "${workspaceFolder}/src/ffhd/**",
                 "/usr/local/cuda/include/**",
                 "/usr/local/cuda/targets/x86_64-linux/include/**",
                 "/usr/local/include/opencv4/**",
                 "/home/zwy/TensorRT-7.2.3.4/include/**",
                 "/home/zwy/TensorRT-7.2.3.4/samples/**",
-                "/usr/include/x86_64-linux-gnu"
+                "/usr/include/x86_64-linux-gnu",
+                "/usr/local/ffmpeg/include",
+                "/home/zwy/Qt5.14.2/5.14.2/gcc_64/include"
             ],
             "compilerPath": "/usr/bin/gcc",
             "cStandard": "gnu11",

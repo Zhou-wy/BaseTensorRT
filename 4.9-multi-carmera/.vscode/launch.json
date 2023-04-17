@@ -5,7 +5,7 @@
             "name": "C++Debug",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/bin/TrtServer",
+            "program": "${workspaceFolder}/bin/tFFHD",
             "args": [],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}/build",

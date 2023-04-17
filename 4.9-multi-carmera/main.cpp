@@ -4,7 +4,7 @@
  * @Author: zwy
  * @Date: 2022-10-13 09:13:25
  * @LastEditors: zwy
- * @LastEditTime: 2022-11-13 16:25:05
+ * @LastEditTime: 2022-11-13 16:47:42
  */
 
 // tensorRT include
@@ -133,6 +133,55 @@ const int color_list[80][3] =
         {0, 113, 188},
         {80, 182, 188},
         {127, 127, 0},
+};
+
+class InferYolo
+{
+public:
+    InferYolo() = delete;
+    InferYolo(std::string onnxFile, std::string engineFile) : m_onnxFile(onnx_file), m_engineFile(engineFile)
+    {
+        m_yoloIns = get_infer(Yolo::Type::V5);
+    };
+
+    bool inference(const cv::Mat &image_input, Yolo::BoxArray &boxarray)
+    {
+
+        if (m_yoloIns == nullptr)
+        {
+            INFOE("Not Initialize.");
+            return false;
+        }
+
+        if (image_input.empty())
+        {
+            INFOE("Image is empty.");
+            return false;
+        }
+        boxarray = m_yoloIns->commit(image_input).get();
+        return true;
+    }
+
+private:
+    shared_ptr<Yolo::Infer> get_infer(Yolo::Type type)
+    {
+        if (!iLogger::exists(m_engineFile))
+        {
+            TRT::compile(
+                TRT::Mode::FP32,
+                10,
+                m_onnxFile,
+                m_engineFile);
+        }
+        else
+        {
+            INFOW("%s has been created!", m_engineFile.c_str());
+        }
+        return Yolo::create_infer(m_engineFile, type, 0, 0.25, 0.45);
+    }
+    shared_ptr<Yolo::Infer> m_yoloIns;
+    std::string m_engineFile;
+    std::string m_onnxFile;
 };
 
 class InferInstance
@@ -366,21 +415,16 @@ int test_http(int port = 8090)
         "4. http://%s/api/getFile                使用自定义写出文件路径作为response\n"
         "5. http://%s/api/putBase64Image         通过提交base64图像数据进行解码后储存\n"
         "6. http://%s/static/img.jpg             直接访问静态文件处理的controller,具体请看函数说明\n"
-        "7. http://%s                            访问web页面,vue开发的",
+        "7. http://%s                            访问web页面,vue开发的", 
         address.c_str(), address.c_str(), address.c_str(), address.c_str(), address.c_str(), address.c_str(), address.c_str());
 
     INFO("按下Ctrl + C结束程序");
-    // iLogger::save_file();
     return iLogger::while_loop();
 }
 
 int main(int argc, char **argv)
 {
-    InferInstance Ins;
-    if (!Ins.startup())
-    {
-        INFO("creating inference is failed!");
-    };
+    InferYolo Ins(onnx_file, engine_file);
 
     cv::Mat image;
     const string videoStreamAddress = "rtsp://admin:admin123@192.168.0.213:554/cam/realmonitor?channel=1&subtype=0";

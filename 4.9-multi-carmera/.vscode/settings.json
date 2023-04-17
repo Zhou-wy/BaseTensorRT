@@ -78,6 +78,10 @@
         "locale": "cpp",
         "unordered_set": "cpp",
         "numeric": "cpp",
-        "cinttypes": "cpp"
+        "cinttypes": "cpp",
+        "qapplication": "cpp",
+        "__mutex_base": "cpp",
+        "qthread": "cpp",
+        "qlistwidget": "cpp"
     }
 }

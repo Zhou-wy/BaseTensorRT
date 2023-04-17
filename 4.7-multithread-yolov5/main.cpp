@@ -4,7 +4,7 @@
  * @Author: zwy
  * @Date: 2022-10-12 16:06:24
  * @LastEditors: zwy
- * @LastEditTime: 2022-11-10 15:53:21
+ * @LastEditTime: 2023-02-14 14:31:56
  */
 
 // tensorRT include
@@ -54,6 +54,23 @@ static const char *cocolabels[] = {
     "oven", "toaster", "sink", "refrigerator", "book", "clock", "vase",
     "scissors", "teddy bear", "hair drier", "toothbrush"};
 
+static const char *labels[] = {
+    "bost",
+    "ship",
+    "ball",
+    "bridge",
+    "rock",
+    "person",
+    "rubbish",
+    "mast",
+    "buoy",
+    "platfrom",
+    "harbor",
+    "tree",
+    "grass",
+    "animal",
+};
+
 static bool exists(const string &path)
 {
 
@@ -68,9 +85,9 @@ static bool exists(const string &path)
 static bool build_model()
 {
 
-    if (exists("../workspace/yolov5s.engine"))
+    if (exists("/home/zwy/CWorkspace/BaseTensorRT/4.7-multithread-yolov5/workspace/best.engine"))
     {
-        printf("workspace/yolov5s.engine has exists.\n");
+        printf("../workspace/best.engine has exists.\n");
         return true;
     }
 
@@ -78,8 +95,8 @@ static bool build_model()
     TRT::compile(
         TRT::Mode::FP32,
         10,
-        "../workspace/yolov5s.onnx",
-        "../workspace/yolov5s.engine",
+        "/home/zwy/CWorkspace/BaseTensorRT/4.7-multithread-yolov5/workspace/best.onnx",
+        "/home/zwy/CWorkspace/BaseTensorRT/4.7-multithread-yolov5/workspace/best.engine",
         1 << 28);
     INFO("Done.");
     return true;
@@ -104,7 +121,7 @@ void inference_video()
 
     cv::VideoCapture cap = cv::VideoCapture(videoStreamAddress);
 
-    auto yolov5 = YoloV5::create_infer("../workspace/yolov5s.engine");
+    auto yolov5 = YoloV5::create_infer("../workspace/best.engine");
     cv::Size size = cv::Size(cap.get(cv::CAP_PROP_FRAME_WIDTH), cap.get(cv::CAP_PROP_FRAME_HEIGHT));
     char Fps[32];
 
@@ -161,7 +178,7 @@ static void inference()
         return;
     }
     // auto image = cv::imread("../workspace/rq.jpg");
-    auto yolov5 = YoloV5::create_infer("../workspace/yolov5s.engine");
+    auto yolov5 = YoloV5::create_infer("../workspace/best.engine");
     cv::Size size = cv::Size(capture.get(cv::CAP_PROP_FRAME_WIDTH), capture.get(cv::CAP_PROP_FRAME_HEIGHT));
     cv::VideoWriter writer;
     char Fps[32];
@@ -198,12 +215,34 @@ static void inference()
     // cv::imwrite("../workspace/image-draw.jpg", image);
 }
 
+void inference_1()
+{
+    auto yolov5 = YoloV5::create_infer("/home/zwy/CWorkspace/BaseTensorRT/4.7-multithread-yolov5/workspace/best.engine");
+    auto src = cv::imread("/home/zwy/CWorkspace/BaseTensorRT/4.7-multithread-yolov5/workspace/20.jpg");
+    auto boxes = yolov5->commit(src).get();
+
+    for (auto &box : boxes)
+    {
+        cv::Scalar color(0, 255, 0);
+        cv::rectangle(src, cv::Point(box.left, box.top), cv::Point(box.right, box.bottom), color, 3);
+
+        auto name = labels[box.class_label];
+        auto caption = cv::format("%s %.2f", name, box.confidence);
+        int text_width = cv::getTextSize(caption, 0, 1, 2, nullptr).width + 10;
+
+        cv::rectangle(src, cv::Point(box.left - 3, box.top - 33), cv::Point(box.left + text_width, box.top), color, -1);
+        cv::putText(src, caption, cv::Point(box.left, box.top - 5), 0, 1, cv::Scalar::all(0), 2, 16);
+    }
+    cv::imwrite("/home/zwy/CWorkspace/BaseTensorRT/4.7-multithread-yolov5/workspace/image-draw-src.jpg", src);
+}
+
 int main(int argc, char const *argv[])
 {
     if (!build_model())
     {
         return -1;
     }
-    inference_video();
+    // inference_video();
+    inference_1();
     return 0;
 }

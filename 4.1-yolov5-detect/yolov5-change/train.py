@@ -618,3 +618,17 @@ def run(**kwargs):
 if __name__ == "__main__":
     opt = parse_opt()
     main(opt)
+###
+# --img
+# 640
+# --batch-size
+# 16
+# --epochs
+# 50
+# --cfg
+# /home/zwy/CWorkspace/BaseTensorRT/4.1-yolov5-detect/yolov5-change/models/yolov5s.yaml
+# --data
+# /home/zwy/CWorkspace/BaseTensorRT/4.1-yolov5-detect/yolov5-change/data/mydata.yaml
+# --weights
+# /home/zwy/CWorkspace/BaseTensorRT/4.1-yolov5-detect/yolov5-change/yolov5s.pt
+# ###

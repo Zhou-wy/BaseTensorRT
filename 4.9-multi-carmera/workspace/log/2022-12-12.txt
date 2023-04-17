@@ -1,0 +1,31 @@
+[2022-12-12 13:42:58][info][test_ffhd.cpp:149]:rtmp://192.168.0.7/live/test
+[2022-12-12 13:59:59][info][test_ffhd.cpp:149]:rtmp://192.168.0.7/live/test
+[2022-12-12 14:00:01][info][XVideoCapture.cpp:64]:打开流媒体成功 width= 1920, height=1080, fps= 25
+[2022-12-12 14:00:01][info][test_ffhd.cpp:157]:open camera success!
+[2022-12-12 14:00:01][info][XMediaEncode.cpp:352]:XMediaEncode 首次启动初始化
+[2022-12-12 14:00:01][info][XVideoCapture.cpp:97]:开始执行video capture线程
+[2022-12-12 14:00:01][info][XMediaEncode.cpp:88]:XMediaEncode InitScale 完成
+[2022-12-12 14:00:01][info][test_ffhd.cpp:174]:初始化视频像素转换上下文成功!
+[2022-12-12 14:00:01][info][XMediaEncode.cpp:143]:InitVideoCodec 获取CUP NUM: 8 
+[2022-12-12 14:00:01][info][XMediaEncode.cpp:163]:XMediaEncode InitVideoCodec 完成
+[2022-12-12 14:00:01][info][XRtmp.cpp:159]:XRtmp 首次启动初始化
+[2022-12-12 14:15:00][info][test_ffhd.cpp:150]:rtmp://192.168.0.7/live/test
+[2022-12-12 14:15:01][info][XVideoCapture.cpp:64]:打开流媒体成功 width= 1920, height=1080, fps= 25
+[2022-12-12 14:15:01][info][test_ffhd.cpp:158]:open camera success!
+[2022-12-12 14:15:01][info][XMediaEncode.cpp:352]:XMediaEncode 首次启动初始化
+[2022-12-12 14:15:01][info][XVideoCapture.cpp:97]:开始执行video capture线程
+[2022-12-12 14:15:01][info][XMediaEncode.cpp:88]:XMediaEncode InitScale 完成
+[2022-12-12 14:15:01][info][test_ffhd.cpp:175]:初始化视频像素转换上下文成功!
+[2022-12-12 14:15:01][info][XMediaEncode.cpp:143]:InitVideoCodec 获取CUP NUM: 8 
+[2022-12-12 14:15:01][info][XMediaEncode.cpp:163]:XMediaEncode InitVideoCodec 完成
+[2022-12-12 14:15:01][info][XRtmp.cpp:159]:XRtmp 首次启动初始化
+[2022-12-12 16:46:05][info][test_ffhd.cpp:150]:rtmp://192.168.0.7/live/test
+[2022-12-12 16:46:06][info][XVideoCapture.cpp:64]:打开流媒体成功 width= 1920, height=1080, fps= 25
+[2022-12-12 16:46:06][info][test_ffhd.cpp:158]:open camera success!
+[2022-12-12 16:46:06][info][XMediaEncode.cpp:352]:XMediaEncode 首次启动初始化
+[2022-12-12 16:46:06][info][XVideoCapture.cpp:97]:开始执行video capture线程
+[2022-12-12 16:46:06][info][XMediaEncode.cpp:88]:XMediaEncode InitScale 完成
+[2022-12-12 16:46:06][info][test_ffhd.cpp:175]:初始化视频像素转换上下文成功!
+[2022-12-12 16:46:06][info][XMediaEncode.cpp:143]:InitVideoCodec 获取CUP NUM: 8 
+[2022-12-12 16:46:06][info][XMediaEncode.cpp:163]:XMediaEncode InitVideoCodec 完成
+[2022-12-12 16:46:06][info][XRtmp.cpp:159]:XRtmp 首次启动初始化

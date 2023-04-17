@@ -1,0 +1,40 @@
+[2023-02-23 16:59:31][info][test_ffhd.cpp:150]:rtmp://192.168.0.7/live/test
+[2023-02-23 16:59:32][info][XVideoCapture.cpp:64]:打开流媒体成功 width= 1920, height=1080, fps= 25
+[2023-02-23 16:59:32][info][test_ffhd.cpp:158]:open camera success!
+[2023-02-23 16:59:32][info][XMediaEncode.cpp:352]:XMediaEncode 首次启动初始化
+[2023-02-23 16:59:32][info][XVideoCapture.cpp:97]:开始执行video capture线程
+[2023-02-23 16:59:32][info][XMediaEncode.cpp:88]:XMediaEncode InitScale 完成
+[2023-02-23 16:59:32][info][test_ffhd.cpp:175]:初始化视频像素转换上下文成功!
+[2023-02-23 16:59:32][info][XMediaEncode.cpp:143]:InitVideoCodec 获取CUP NUM: 8 
+[2023-02-23 16:59:32][info][XMediaEncode.cpp:163]:XMediaEncode InitVideoCodec 完成
+[2023-02-23 16:59:32][info][XRtmp.cpp:159]:XRtmp 首次启动初始化
+[2023-02-23 17:15:04][info][test_ffhd.cpp:150]:rtmp://192.168.0.7/live/test
+[2023-02-23 17:15:05][info][XVideoCapture.cpp:64]:打开流媒体成功 width= 1920, height=1080, fps= 25
+[2023-02-23 17:15:05][info][test_ffhd.cpp:158]:open camera success!
+[2023-02-23 17:15:05][info][XMediaEncode.cpp:352]:XMediaEncode 首次启动初始化
+[2023-02-23 17:15:05][info][XVideoCapture.cpp:97]:开始执行video capture线程
+[2023-02-23 17:15:05][info][XMediaEncode.cpp:88]:XMediaEncode InitScale 完成
+[2023-02-23 17:15:05][info][test_ffhd.cpp:175]:初始化视频像素转换上下文成功!
+[2023-02-23 17:15:05][info][XMediaEncode.cpp:143]:InitVideoCodec 获取CUP NUM: 8 
+[2023-02-23 17:15:05][info][XMediaEncode.cpp:163]:XMediaEncode InitVideoCodec 完成
+[2023-02-23 17:15:05][info][XRtmp.cpp:159]:XRtmp 首次启动初始化
+[2023-02-23 17:16:23][info][test_ffhd.cpp:150]:rtmp://192.168.0.7/live/test
+[2023-02-23 17:16:24][info][XVideoCapture.cpp:64]:打开流媒体成功 width= 1920, height=1080, fps= 25
+[2023-02-23 17:16:24][info][test_ffhd.cpp:158]:open camera success!
+[2023-02-23 17:16:24][info][XMediaEncode.cpp:352]:XMediaEncode 首次启动初始化
+[2023-02-23 17:16:24][info][XVideoCapture.cpp:97]:开始执行video capture线程
+[2023-02-23 17:16:24][info][XMediaEncode.cpp:88]:XMediaEncode InitScale 完成
+[2023-02-23 17:16:24][info][test_ffhd.cpp:175]:初始化视频像素转换上下文成功!
+[2023-02-23 17:16:24][info][XMediaEncode.cpp:143]:InitVideoCodec 获取CUP NUM: 8 
+[2023-02-23 17:16:24][info][XMediaEncode.cpp:163]:XMediaEncode InitVideoCodec 完成
+[2023-02-23 17:16:24][info][XRtmp.cpp:159]:XRtmp 首次启动初始化
+[2023-02-23 19:26:51][info][test_ffhd.cpp:150]:rtmp://192.168.0.7/live/test
+[2023-02-23 19:26:52][info][XVideoCapture.cpp:64]:打开流媒体成功 width= 1920, height=1080, fps= 25
+[2023-02-23 19:26:52][info][test_ffhd.cpp:158]:open camera success!
+[2023-02-23 19:26:52][info][XMediaEncode.cpp:352]:XMediaEncode 首次启动初始化
+[2023-02-23 19:26:52][info][XVideoCapture.cpp:97]:开始执行video capture线程
+[2023-02-23 19:26:52][info][XMediaEncode.cpp:88]:XMediaEncode InitScale 完成
+[2023-02-23 19:26:52][info][test_ffhd.cpp:175]:初始化视频像素转换上下文成功!
+[2023-02-23 19:26:52][info][XMediaEncode.cpp:143]:InitVideoCodec 获取CUP NUM: 8 
+[2023-02-23 19:26:52][info][XMediaEncode.cpp:163]:XMediaEncode InitVideoCodec 完成
+[2023-02-23 19:26:52][info][XRtmp.cpp:159]:XRtmp 首次启动初始化
